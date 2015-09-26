@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="miTiendita">
 <head>
 	<meta charset="UTF-8">
 	<title>Resultado del Curso de AngularJS de 0 a 100</title>
 </head>
 <body>
-	<label>Nombre</label>
-	<input type="text" data-ng-model="nombre">
-	<hr>
-	Tú nombre es: {{ nombre | uppercase }}.
+	<div ng-controller="tienda">
+		<h4>¡Promoción de naranjas!</h4>
+		<h5>A {{ precio | currency: 'CLP$ ' }} c/u</h5>
+
+		<label>Cantidad de Naranjas</label>
+		<input type="text" ng-model="cantidad">
+
+		<br>
+
+		<p>Precio Total: {{ precio * cantidad | currency: 'CLP$ ' }}</p>
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+
+	<script>
+		miTiendita = angular.module( 'miTiendita', [] );
+
+		miTiendita.controller( 'tienda', [ '$scope', function ($scope) {
+			$scope.cantidad = 0;
+			$scope.precio = 100;
+		} ] );
+	</script>
 </body>
 </html>
