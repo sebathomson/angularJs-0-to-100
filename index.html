@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="miTiendita">
+<html lang="en" ng-app="miAgendita">
 <head>
 	<meta charset="UTF-8">
 	<title>Resultado del Curso de AngularJS de 0 a 100</title>
 </head>
 <body>
-	<div ng-controller="tienda">
-		<h4>¡Promoción de naranjas!</h4>
-		<h5>A {{ precio | currency: 'CLP$ ' }} c/u</h5>
+	<div ng-controller="agenda">
+		<h4>Mi Agendita</h4>
+		
+		<input type="search" ng-model="filtro">
 
-		<label>Cantidad de Naranjas</label>
-		<input type="text" ng-model="cantidad">
+		<p ng-repeat="persona in personas | filter: filtro">
+			{{ persona.nombres }}: {{ persona.email }}
+		</p>
 
-		<br>
 
-		<p>Precio Total: {{ precio * cantidad | currency: 'CLP$ ' }}</p>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 
 	<script>
-		miTiendita = angular.module( 'miTiendita', [] );
+		miTiendita = angular.module( 'miAgendita', [] );
 
-		miTiendita.controller( 'tienda', [ '$scope', function ($scope) {
-			$scope.cantidad = 0;
-			$scope.precio = 100;
+		miTiendita.controller( 'agenda', [ '$scope', function ($scope) {
+			$scope.personas = [
+				{ 'nombres': 'Alexis Sanchez', 'email': 'alersis@arsenal.uk' },
+				{ 'nombres': 'Arturo Vidal', 'email': 'kingarturo@fcbm.ge' },
+				{ 'nombres': 'Claudio Bravo', 'email': 'herrera-es-mi-hijo@fcb.cat' },
+				{ 'nombres': 'Gary Medel', 'email': 'inter@gary.medel' }
+			];
 		} ] );
 	</script>
 </body>
